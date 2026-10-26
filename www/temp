@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shahirizal Personal Portfolio</title>
+  <link id="favicon" rel="icon" type="image/jpeg" href="tab.jpg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Theme Variables */
+    :root[data-theme="dark"] { 
+      --bg-deep: #050b14;
+      --bg-navy: #0b1329; 
+      --bg-card: #0f1c35; 
+      --border-color: #1e355e;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-blue: #38bdf8;
+      --card-hover-shadow: rgba(56, 189, 248, 0.15);
+    }
+
+    :root[data-theme="light"] { 
+      --bg-deep: #cbd5e1;
+      --bg-navy: #ffffff; 
+      --bg-card: #ffffff; 
+      --border-color: #94a3b8;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --accent-blue: #0284c7;
+      --card-hover-shadow: rgba(2, 132, 199, 0.15);
+    }
+    
+    /* Custom Aeroplane Cursor */
+    *, *::before, *::after { 
+        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%230284c7' stroke='%23ffffff' stroke-width='1.5'%3E%3Cpath d='M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z'/%3E%3C/svg%3E") 12 12, auto !important; 
+    }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { background-color: var(--bg-deep); color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; font-size: 1rem; line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
+    h1, h2, h3, .font-heading { font-weight: 700; letter-spacing: -0.5px; }
+    .muted { color: var(--text-muted); } 
+    
+    #web { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.3; }
+    header, main, section, footer { position: relative; z-index: 1; }
+
+    /* Boot Screen with boot.gif Background Support (Extended to 5s) */
+    #boot { 
+      position: fixed; 
+      inset: 0; 
+      z-index: 10000; 
+      background: linear-gradient(rgba(5, 11, 20, 0.8), rgba(5, 11, 20, 0.8)), rgba(5, 11, 20, 0.5) url('boot.gif'); 
+      background-size: cover; 
+      background-position: center; 
+      display: grid; 
+      place-content: center; 
+      padding: 1.5rem; 
+      font-weight: 600; 
+      color: #fff; 
+      animation: bootout .8s 5s forwards; 
+    }
+    #boot p { margin: .25rem 0; opacity: 0; animation: line .01s forwards; font-size: 0.9rem; }
+    #boot .ok { color: #38bdf8; } 
+    #boot .big { 
+      font-size: 1.5rem; 
+      font-weight: 800; 
+      letter-spacing: 0.5px; 
+      text-transform: uppercase; 
+      margin-top: 0.8rem; 
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 4px 12px rgba(56,189,248,0.25));
+    }
+    #boot .sub-quote {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      margin-top: 0.4rem;
+      letter-spacing: 0.3px;
+    }
+    @keyframes line { to { opacity: 1; } }
+    @keyframes bootout { to { opacity: 0; visibility: hidden; } }
+
+    /* Topbar */
+    .topbar { position: sticky; top: 0; z-index: 50; background: var(--bg-navy); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); transition: background-color 0.3s ease, border-color 0.3s ease; }
+    .topbar a { color: var(--text-main); text-decoration: none; font-weight: 600; padding: .5rem 1rem; display: inline-block; border-radius: 6px; transition: all .2s; }
+    .topbar a:hover { background: rgba(56, 189, 248, 0.1); color: var(--accent-blue); }
+    
+    .meter { display: flex; align-items: center; gap: .6rem; font-weight: 600; font-size: 0.85rem; color: var(--text-muted); }
+    .meter .bar { width: 100px; height: 8px; border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden; background: var(--bg-deep); } 
+    .meter .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent-blue), #60a5fa); transition: width .4s; }
+    
+    .action-btn { font-weight: 600; font-size: 0.85rem; color: var(--text-main); background: var(--bg-deep); border: 1px solid var(--border-color); border-radius: 6px; padding: .3rem .8rem; cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .action-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+
+    /* Main Profile Hero Section (bg.gif with 50% Opacity Overlay) */
+    .hero { 
+      background: linear-gradient(rgba(5, 11, 20, 0.75), rgba(11, 19, 41, 0.80)), rgba(5, 11, 20, 0.5) url('background.jpg'); 
+      background-size: cover; 
+      background-position: center; 
+      border-bottom: 1px solid #1e355e; 
+      padding: 5rem 0; 
+      color: #f1f5f9 !important;
+    }
+    .hero .tagline { color: #38bdf8; letter-spacing: 2px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; }
+    .hero .title-main { font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.15; color: #f1f5f9; font-weight: 800; }
+    .hero .muted { color: #94a3b8 !important; }
+    
+    .burst { 
+      display: inline-block; 
+      white-space: nowrap; 
+      font-weight: 700; 
+      font-size: 0.95rem; 
+      padding: .4rem 1.2rem; 
+      border-radius: 8px; 
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 50%, #6366f1 100%);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+    }
+    
+    .telemetry { display: inline-block; text-align: left; background: #0f1c35; border: 1px solid #1e355e; border-left: 3px solid #38bdf8; border-radius: 6px; color: #f1f5f9; padding: .75rem 1rem; font-size: 0.9rem; max-width: 100%; }
+
+    /* Lanyard & ID Card (bg.gif with 50% Opacity) */
+    .lanyard { position: relative; width: 260px; margin: 0 auto; padding-top: 70px; transform-origin: 50% -30px; cursor: grab; touch-action: pan-y; user-select: none; }
+    .lanyard:active { cursor: grabbing; }
+    #pivot { position: absolute; left: 50%; top: -30px; width: 1px; height: 1px; }
+    .strap { position: absolute; left: 0; top: -35px; width: 260px; height: 150px; z-index: 2; pointer-events: none; overflow: visible; }
+    
+    .idcard { 
+      position: relative; 
+      background: linear-gradient(rgba(15, 28, 53, 0.82), rgba(15, 28, 53, 0.88)), rgba(5, 11, 20, 0.5) url('bg.gif'); 
+      background-size: cover; 
+      background-position: center; 
+      color: #f1f5f9; 
+      border-radius: 12px; 
+      border: 1px solid #1e355e; 
+      border-top: 3px solid #38bdf8; 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
+      overflow: hidden; 
+      text-align: center; 
+    }
+    .idcard .head { background: rgba(5, 11, 20, 0.8); color: #94a3b8; font-weight: 700; letter-spacing: 1.5px; padding: 1rem .4rem .4rem; border-bottom: 1px solid #1e355e; font-size: 0.75rem; text-transform: uppercase; }
+    
+    /* Adjusted Profile Image Size & Positioning for Full Head View */
+    .idcard img { 
+      width: 140px; 
+      height: 140px; 
+      object-fit: cover; 
+      object-position: center 20%; 
+      margin: 1.2rem auto .6rem; 
+      border: 2px solid #38bdf8; 
+      border-radius: 50%; 
+      background: #050b14; 
+      display: block;
+    }
+    .idcard .nm { font-weight: 700; font-size: 1.1rem; line-height: 1.2; padding: 0 0.5rem; color: #f1f5f9; text-shadow: 0 2px 4px rgba(0,0,0,0.3); } 
+    .idcard .meta { font-weight: 500; font-size: 0.75rem; color: #94a3b8; margin-top: 0.2rem; }
+    .idcard .code { height: 22px; margin: .8rem 1rem 1rem; border-radius: 4px; background: repeating-linear-gradient(90deg, #94a3b8 0 2px, transparent 2px 4px, #94a3b8 4px 5px, transparent 5px 9px); opacity: 0.5; }
+
+    /* Marquee Ticker */
+    .marquee { position: relative; z-index: 1; overflow: hidden; background: var(--bg-navy); border-bottom: 1px solid var(--border-color); border-top: 1px solid var(--border-color); padding: .75rem 0; transition: background 0.3s ease; }
+    .track { display: flex; width: max-content; animation: slide 35s linear infinite; }
+    .marquee:hover .track { animation-play-state: paused; }
+    .film { font-weight: 600; font-size: 0.95rem; color: var(--text-muted); white-space: nowrap; padding: 0 2rem; letter-spacing: 0.5px; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; }
+    .film small { font-size: 0.75rem; color: var(--accent-blue); font-weight: 500; background: rgba(56, 189, 248, 0.1); padding: 0.1rem 0.4rem; border-radius: 4px; }
+    @keyframes slide { to { transform: translateX(-50%); } }
+
+    /* Lab Cards Panel (blp.jpg with 50% Opacity) */
+    .panel { 
+      position: relative; 
+      background: linear-gradient(rgba(15, 28, 53, 0.82), rgba(15, 28, 53, 0.88)), rgba(5, 11, 20, 0.5) url('blp.jpg') !important; 
+      background-size: cover !important; 
+      background-position: center !important; 
+      color: #f1f5f9 !important; 
+      border: 1px solid #1e355e !important; 
+      border-top: 3px solid #1e355e !important; 
+      border-radius: 10px; 
+      transition: all .25s ease; 
+    }
+    .panel:hover { transform: translateY(-3px); border-color: #38bdf8 !important; box-shadow: 0 12px 30px -10px rgba(56, 189, 248, 0.25); }
+    .panel p { color: #94a3b8 !important; }
+
+    /* Project Cards Panel (bip.jpg with 50% Opacity) */
+    .panel-project { 
+      background: linear-gradient(rgba(15, 28, 53, 0.82), rgba(15, 28, 53, 0.88)), rgba(5, 11, 20, 0.5) url('bip.jpg') !important; 
+      background-size: cover !important; 
+      background-position: center !important; 
+      border-top-color: #38bdf8 !important; 
+    }
+
+    .tag { font-weight: 700; font-size: 0.7rem; border-radius: 4px; color: #f1f5f9; padding: .25em .7em; letter-spacing: 0.5px; text-transform: uppercase; } 
+    .tag-lab { background: rgba(5, 11, 20, 0.7); color: #f1f5f9; border: 1px solid #1e355e; } 
+    .tag-proj { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+
+    .btn-web, .btn-suit { font-weight: 600; font-size: 0.85rem; border-radius: 6px; color: #f1f5f9; background: rgba(56, 189, 248, 0.08); transition: all .2s; padding: .45rem 1rem; text-decoration: none; display: inline-flex; align-items: center; gap: .4rem; border: 1px solid #1e355e; }
+    .btn-web:hover { background: #38bdf8; color: #fff; border-color: #38bdf8; }
+    .btn-suit { background: rgba(56, 189, 248, 0.12); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); } 
+    .btn-suit:hover { background: #38bdf8; color: #fff; border-color: #38bdf8; }
+
+    .toggle { position: relative; z-index: 2; font-weight: 600; font-size: 0.75rem; color: #94a3b8; background: rgba(0,0,0,0.3); border: 1px solid #1e355e; border-radius: 6px; padding: .25rem .6rem; margin-top: .8rem; align-self: flex-start; cursor: pointer; transition: all .2s; }
+    .toggle:hover { background: rgba(56, 189, 248, 0.2); color: #f1f5f9; border-color: #38bdf8; }
+    
+    .done { border-color: #38bdf8 !important; }
+    .done::before { content: "COMPLETED ✓"; position: absolute; top: 12px; right: 12px; z-index: 1; font-weight: 700; font-size: 0.7rem; color: #38bdf8; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 4px; padding: .1rem .4rem; pointer-events: none; }
+
+    .project-section { background: var(--bg-deep); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); transition: background 0.3s ease; }
+
+    /* Professional First-Time Scroll Popup */
+    #welcome-popup { position: fixed; bottom: 30px; right: 30px; z-index: 9999; max-width: 340px; background: var(--bg-navy); backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-blue); border-radius: 10px; padding: 1.25rem; box-shadow: 0 15px 35px rgba(0,0,0,0.25); transform: translateY(120%); opacity: 0; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease; }
+    #welcome-popup.show { transform: translateY(0); opacity: 1; }
+    #welcome-popup h5 { font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; display: flex; align-items: center; justify-content: space-between; }
+    #welcome-popup p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem; line-height: 1.5; }
+    #welcome-popup button { background: var(--accent-blue); color: #fff; border: none; font-weight: 600; font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer; transition: opacity 0.2s; }
+
+    #shots { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9500; }
+    .hp { font-size: 14px; font-weight: 600; transform-box: fill-box; transform-origin: center; animation: fly .7s ease-out forwards; }
+    @keyframes fly { from { transform: translate(0,0) scale(.5); opacity: 1; } to { transform: translate(var(--dx),var(--dy)) scale(1.1); opacity: 0; } }
+    .sfx { font-weight: 700; font-size: 16px; fill: var(--accent-blue); stroke: var(--bg-deep); stroke-width: 3px; paint-order: stroke; animation: pop .6s .1s both; }
+    @keyframes pop { 0% { opacity: 0; transform: scale(.5); } 30% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0; transform: scale(1); } }
+
+    footer { background: var(--bg-navy); border-top: 1px solid var(--border-color); color: var(--text-muted); transition: background 0.3s ease; }
+  </style>
+</head>
+
+<body>
+  <canvas id="web" aria-hidden="true"></canvas>
+  <svg id="shots" aria-hidden="true"></svg>
+
+  <div id="boot" aria-hidden="true">
+    <p style="animation-delay:.2s">⚡ SYSTEM INITIALIZATION v4.26</p>
+    <p style="animation-delay:.7s">&gt; mounting security protocols & cryptography ...... <span class="ok">SECURE</span></p>
+    <p style="animation-delay:1.2s">&gt; calibrating database nodes & MVC architecture .... <span class="ok">OPTIMIZED</span></p>
+    <p style="animation-delay:1.7s">&gt; compiling portfolio assets & interactive elements ... <span class="ok">100%</span></p>
+    <p class="big" style="animation-delay:2.4s">Nothing last forever, we can change the future</p>
+    <p class="sub-quote" style="animation-delay:3.2s">&gt; Code with purpose, engineer the future.</p>
+  </div>
+
+  <!-- Welcome Popup (Triggered on First Scroll) -->
+  <div id="welcome-popup">
+    <h5><span><i class="fa-solid fa-circle-info text-info me-1"></i> Quick Tip</span> <button type="button" id="close-popup"><i class="fa-solid fa-xmark"></i></button></h5>
+    <p>Welcome to Muhammad Shahir's portfolio hub. Click "Mark checkpoint" on any lab or project module to track your review progress dynamically!</p>
+    <button type="button" id="got-it">Got it, let's explore</button>
+  </div>
+
+  <nav class="topbar">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center py-2">
+      <div><a href="#top" class="fs-6"><i class="fa-solid fa-code text-info me-1"></i> A219426</a><a href="#labs">Missions</a><a href="#project">Project</a></div>
+      <div class="d-flex align-items-center gap-2">
+        <button id="theme-toggle" class="action-btn" type="button" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+        <button id="hud" class="action-btn" type="button" aria-pressed="false">Telemetry: off</button>
+        <div class="meter"><span>PROGRESS <b id="count">0</b>/15</span><span class="bar"><i id="fill"></i></span></div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero py-5" id="top">
+    <div class="container py-lg-3">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7 text-center text-lg-start">
+          <p class="tagline text-uppercase mb-2"><i class="fa-solid fa-terminal me-1"></i> SOFTWARE ENGINEERING PORTFOLIO</p>
+          <h1 class="title-main mb-3">Web Programming Deliverables</h1>
+          <p class="lead fs-5 muted mb-3">A219426 – MUHAMMAD SHAHIR BIN MUHAMMAD RIZAL FIKADA</p>
+          <span class="burst mb-4" id="burst">Status: System Operational</span>
+          <div class="mt-2"><div class="telemetry" id="karen" aria-live="polite"></div></div>
+          <p class="muted small mt-3 mb-0">Interactive telemetry sparks enabled. Click buttons to record laboratory progression.</p>
+        </div>
+        <div class="col-lg-5">
+          <div class="lanyard" id="lanyard"><i id="pivot"></i><div class="idcard">
+            <div class="head">UKM · FTSM</div>
+            <img src="shahir.jpg" alt="Student photo">
+            <div class="nm">MUHAMMAD SHAHIR</div>
+            <div class="meta">ID A219426 · TTTM2113</div>
+            <div class="meta">SOFTWARE ENGINEERING</div>
+            <div class="code"></div>
+          </div>
+          <svg class="strap" viewBox="0 -35 260 150" aria-hidden="true">
+            <defs>
+              <path id="sl" d="M100 -25L130 90"/><path id="sr" d="M130 90L160 -25"/>
+              <linearGradient id="mt" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#1e355e"/></linearGradient>
+            </defs>
+            <g fill="none"><use href="#sl" stroke="#0f1c35" stroke-width="19"/><use href="#sr" stroke="#0f1c35" stroke-width="19"/>
+              <use href="#sl" stroke="url(#mt)" stroke-width="13"/><use href="#sr" stroke="url(#mt)" stroke-width="13"/></g>
+            <g font-size="8" fill="#94a3b8" letter-spacing="1">
+              <text dy="3"><textPath href="#sl" startOffset="6">TTTM2113 ♡ SECURE ♡ UKM</textPath></text>
+              <text dy="3"><textPath href="#sr" startOffset="6">TTTM2113 ♡ SECURE ♡ UKM</textPath></text>
+            </g>
+            <circle cx="130" cy="-25" r="6" fill="#fff" stroke="#38bdf8" stroke-width="2"/>
+          </svg>
+        </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="marquee" aria-label="System Ticker">
+    <div class="track" id="track"></div>
+  </div>
+
+  <main class="container py-5" id="labs">
+    <div class="text-center mb-5">
+      <h2 class="display-6 heading"><i class="fa-solid fa-list-check text-info me-2"></i>Weekly Labs & Checkpoints</h2>
+      <p class="muted mb-0">Structured architectural milestones from fundamental HTML markup to asynchronous RESTful architectures.</p>
+    </div>
+    <div class="row g-4" id="lab-grid"></div>
+  </main>
+
+  <section class="project-section py-5" id="project">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <h2 class="display-6 heading"><i class="fa-solid fa-layer-group text-info me-2"></i>Individual Project</h2>
+        <p class="muted mx-auto mb-0" style="max-width:750px;">
+          Designing and deploying a secure enterprise management system focused on 
+          <strong class="heading">Automotive Spare Parts Inventory</strong>.<br>
+          <span class="small">Delivering robust back-office workflows, inventory controllers, and database reliability.</span>
+        </p>
+      </div>
+      <div class="row g-4" id="proj-grid"></div>
+    </div>
+  </section>
+
+  <footer class="text-center py-4">
+    <div class="container">
+      <p class="fs-6 mb-1 heading fw-bold">TTTM2113 Web Development</p>
+      <p class="muted mb-0 small">Professional Portfolio Edition · Copyright © 2026 Muhammad Shahir · Universiti Kebangsaan Malaysia</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const labs = [
+      ["Basic HTML", "Introduction to HTML elements and document structure.", "lab-1/index.html"],
+      ["HTML Forms", "Creating forms and collecting user input with HTML.", "lab-2/index.html"],
+      ["Cascading Style Sheet", "Designing and styling web pages using CSS.", "#"],
+      ["Bootstrap", "Creating responsive interfaces using Bootstrap 5.", "#"],
+      ["Basic PHP", "Introduction to server-side programming using PHP.", "#"],
+      ["PHP + MySQL", "Connecting PHP applications to a MySQL database.", "#"],
+      ["MVC Framework", "Building web applications using the Model-View-Controller pattern.", "#"],
+      ["Advanced PHP", "Developing more advanced server-side PHP applications.", "#"],
+      ["JavaScript", "Adding interaction and dynamic behaviour to web pages.", "#"],
+      ["jQuery", "Simplifying JavaScript programming using jQuery.", "#"],
+      ["AJAX + RESTful API + JSON", "Working with web APIs and exchanging data using JSON.", "#"]
+    ];
+    const tasks = [
+      ["Project Task 1", "HTML+CSS", "Develop the initial interface and page structure for the project.", "#"],
+      ["Project Task 2", "PHP + Database + MVC", "Implement server-side functionality and database operations.", "#"],
+      ["Project Task 3", "JavaScript + AJAX", "Improve usability and responsiveness with JavaScript and AJAX.", "#"],
+      ["Final Task", "Final Enhancement", "Complete the system and add meaningful enhancements to the project.", "#"]
+    ];
+    const $ = id => document.getElementById(id);
+    const card = (id, cls, tag, tagCls, title, desc, href, btnCls, btn, col) => `
+      <div class="${col}"><div class="card h-100 panel ${cls}" data-id="${id}"><div class="card-body p-4 d-flex flex-column">
+        <span class="badge tag ${tagCls} mb-3 align-self-start">${tag}</span>
+        <h3 class="h5 heading fw-bold">${title}</h3>
+        <p class="muted mb-3 small">${desc}</p>
+        <a href="${href}" class="btn ${btnCls} stretched-link mt-auto align-self-start">${btn}</a>
+        <button type="button" class="toggle">Mark checkpoint</button>
+      </div></div></div>`;
+    $("lab-grid").innerHTML = labs.map((l, i) => card("lab" + (i + 1), "", "Lab-" + (i + 1), "tag-lab", l[0], l[1], l[2], "btn-web", "Open Module →", "col-md-6 col-lg-4")).join("");
+    $("proj-grid").innerHTML = tasks.map((t, i) => card("task" + (i + 1), "panel-project", t[0], "tag-proj", t[1], t[2], t[3], "btn-suit", "View Specification →", "col-md-6 col-xl-3")).join("");
+
+    // Theme Toggle Setup
+    const htmlEl = document.documentElement;
+    const themeBtn = $("theme-toggle");
+    const savedTheme = localStorage.getItem("rbr_theme") || "dark";
+    htmlEl.setAttribute("data-theme", savedTheme);
+    updateThemeIcon(savedTheme);
+
+    themeBtn.onclick = () => {
+      const current = htmlEl.getAttribute("data-theme");
+      const next = current === "dark" ? "light" : "dark";
+      htmlEl.setAttribute("data-theme", next);
+      localStorage.setItem("rbr_theme", next);
+      updateThemeIcon(next);
+    };
+
+    function updateThemeIcon(t) {
+      themeBtn.innerHTML = t === "dark" ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun text-warning"></i>';
+    }
+
+    let saved = [];
+    try { saved = JSON.parse(localStorage.getItem("cleared_pro") || "[]"); } catch (e) {}
+    const panels = document.querySelectorAll(".panel");
+    function refresh() {
+      panels.forEach(p => { const on = saved.includes(p.dataset.id); p.classList.toggle("done", on); p.querySelector(".toggle").textContent = on ? "Clear checkpoint" : "Mark checkpoint"; });
+      $("count").textContent = saved.length;
+      $("fill").style.width = (saved.length / panels.length * 100) + "%";
+      try { localStorage.setItem("cleared_pro", JSON.stringify(saved)); } catch (e) {}
+    }
+    refresh();
+
+    // AI Telemetry Prompt
+    const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let typer;
+    function say(text, delay = 0) {
+      clearTimeout(typer);
+      if (calm) { $("karen").textContent = text; return; }
+      let i = 0; $("karen").textContent = "";
+      typer = setTimeout(function t() { $("karen").textContent = text.slice(0, ++i); if (i < text.length) typer = setTimeout(t, 20); }, delay);
+    }
+    say("PORTFOLIO SYSTEM: All diagnostic parameters normal. 11 laboratory modules and 4 project requirements ready for deployment.", calm ? 0 : 2500);
+
+    // Ticker Marquee Professional
+    const films = [
+      ["Software Engineering", "UKM", "#38bdf8"], ["TTTM2113 Web Development", "Core Module", "#94a3b8"], ["Automotive Spare Parts", "System", "#38bdf8"],
+      ["PHP + MySQL", "Backend Architecture", "#94a3b8"], ["Bootstrap 5", "Responsive UI", "#38bdf8"], ["JavaScript & AJAX", "Interactivity", "#38bdf8"]
+    ];
+    const reel = films.map(f => `<span class="film">${f[0]}<small>${f[1]}</small></span>`).join("");
+    $("track").innerHTML = reel + reel;
+
+    // Burst Status Rotator
+    const lines = ["Status: System Operational", "Security Level: Optimized", "Architecture: MVC Standard", "Database: Connected", "Interface: Responsive"];
+    let li = 0;
+    if (!calm) setInterval(() => {
+      const b = $("burst"); li = (li + 1) % lines.length; b.textContent = lines[li];
+    }, 3500);
+
+    // First-time Scroll Popup Logic
+    let popupShown = false;
+    window.addEventListener("scroll", () => {
+      if (!popupShown && window.scrollY > 150) {
+        popupShown = true;
+        $("welcome-popup").classList.add("show");
+      }
+    }, { once: false });
+
+    $("close-popup").onclick = $("got-it").onclick = () => {
+      $("welcome-popup").classList.remove("show");
+    };
+
+    // Lanyard physics pendulum
+    const lan = $("lanyard"), pv = $("pivot");
+    let ang = 0, vel = 0, drag = false, lastAng = 0;
+    if (!calm) {
+      setTimeout(() => { ang = -10; }, 2500);
+      lan.addEventListener("pointermove", e => {
+        if (drag) {
+          const p = pv.getBoundingClientRect();
+          const dx = e.clientX - (p.left + p.width / 2), dy = e.clientY - (p.top + p.height / 2);
+          ang = Math.max(-40, Math.min(40, -Math.atan2(dx, Math.max(dy, 40)) * 180 / Math.PI));
+          return;
+        }
+        const r = lan.getBoundingClientRect(), k = Math.min(1, Math.max(.25, (e.clientY - r.top) / r.height));
+        vel = Math.max(-150, Math.min(150, vel - e.movementX * 2 * k));
+      });
+      lan.addEventListener("pointerdown", e => { drag = true; vel = 0; lan.setPointerCapture(e.pointerId); });
+      ["pointerup", "pointercancel"].forEach(n => lan.addEventListener(n, () => { drag = false; }));
+      let t0 = performance.now();
+      (function tick(t) {
+        const dt = Math.min(.033, (t - t0) / 1000) || .016; t0 = t;
+        if (drag) vel = vel * .6 + (ang - lastAng) / dt * .4;
+        else { vel += (-35 * ang - 1.2 * vel) * dt; ang = Math.max(-40, Math.min(40, ang + vel * dt)); }
+        lastAng = ang;
+        lan.style.transform = `rotate(${ang.toFixed(2)}deg)`;
+        requestAnimationFrame(tick);
+      })(t0);
+    }
+
+    // Telemetry mode toggle
+    let hud = false;
+    $("hud").onclick = () => {
+      hud = !hud;
+      $("hud").textContent = "Telemetry: " + (hud ? "on" : "off");
+      $("hud").setAttribute("aria-pressed", hud);
+      say(hud ? "PORTFOLIO SYSTEM: Advanced debugging overlay enabled." : "PORTFOLIO SYSTEM: Standard mode resumed.");
+    };
+
+    // Click animations
+    const NS = "http://www.w3.org/2000/svg", sfx = ["saved", "updated", "sync", "ok"];
+    document.addEventListener("click", e => {
+      const b = e.target.closest(".toggle");
+      if (b) { const id = b.closest(".panel").dataset.id; saved = saved.includes(id) ? saved.filter(x => x !== id) : [...saved, id]; refresh(); }
+      if (calm) return;
+      const x = e.clientX, y = e.clientY, g = document.createElementNS(NS, "g");
+      g.innerHTML = Array.from({ length: 6 }, (_, i) => {
+        const a = i / 6 * 6.283 + Math.random() * .3, d = 25 + Math.random() * 35;
+        return `<text class="hp" x="${x}" y="${y}" style="--dx:${Math.cos(a) * d}px;--dy:${Math.sin(a) * d}px;fill:${["#38bdf8", "#64748b", "#0284c7"][i % 3]}">${["◆", "•", "▪"][i % 3]}</text>`;
+      }).join("") + `<text class="sfx" x="${x + 15}" y="${y - 12}">${sfx[Math.floor(Math.random() * 4)]}</text>`;
+      $("shots").appendChild(g);
+      setTimeout(() => g.remove(), 800);
+    });
+
+    // Floating background minimal nodes
+    const cv = $("web"), c = cv.getContext("2d");
+    let W, H, D, mx = -999, my = -999;
+    const glyphs = ["+", "·", "▪", "○"], cols = ["#38bdf8", "#64748b", "#1e355e"];
+    function size() { D = devicePixelRatio || 1; W = innerWidth; H = innerHeight; cv.width = W * D; cv.height = H * D; c.setTransform(D, 0, 0, D, 0, 0); }
+    size(); addEventListener("resize", size);
+    addEventListener("pointermove", e => { mx = e.clientX; my = e.clientY; });
+    const pick = a => a[Math.floor(Math.random() * a.length)];
+    const ps = Array.from({ length: 25 }, () => ({ x: Math.random() * innerWidth, y: Math.random() * innerHeight, s: 8 + Math.random() * 12, v: .2 + Math.random() * .4, g: pick(glyphs), c: pick(cols), ph: Math.random() * 6.28, vx: 0, vy: 0 }));
+    function draw(t = 0) {
+      c.clearRect(0, 0, W, H);
+      c.globalAlpha = 0.25; c.textAlign = "center";
+      for (const p of ps) {
+        const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy) || 1;
+        if (d < 100) { const f = (100 - d) / 100; p.vx += dx / d * f * 0.5; p.vy += dy / d * f * 0.5; }
+        p.vx *= .95; p.vy *= .95;
+        p.x += p.vx; p.y += p.vy - p.v;
+        if (p.y < -20) p.y = H + 20; if (p.x < -20) p.x = W + 20; if (p.x > W + 20) p.x = -20;
+        c.font = p.s + "px sans-serif"; c.fillStyle = p.c; c.fillText(p.g, p.x, p.y);
+      }
+      if (!calm) requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
+</body>
+</html>
