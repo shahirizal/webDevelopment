@@ -1,25 +1,25 @@
 <?php 
 ob_start(); 
 ?>
-<div class="card shadow border-0 border-start border-5 border-primary mb-4">
+<div class="card shadow border-0 border-start border-5 mb-4" style="background-color: #bae6fd; border-color: #0ea5e9 !important;">
     <div class="card-body">
-        <h2 class="mb-1">Orders</h2>
+        <h2 class="mb-1 text-dark">Orders</h2>
         <p class="text-muted mb-0">Manage and track all customer orders</p>
     </div>
 </div>
 
-<div class="card shadow-sm mb-4">
+<div class="card shadow-sm mb-4 bg-white border-0">
     <div class="card-body">
         <div class="row g-0 align-items-center mb-3">
             <div class="col">
-                <h5 class="mb-0">
-                    <i class="bi bi-pencil-square text-primary me-2"></i>
+                <h5 class="mb-0 text-dark">
+                    <i class="bi bi-pencil-square me-2" style="color: #0ea5e9;"></i>
                     Order Form
                 </h5>
                 <small class="text-muted">Fill in the details of a new order</small>
             </div>
             <div class="col-auto">
-                <span class="badge bg-primary">* Required fields</span>
+                <span class="badge text-white" style="background-color: #0ea5e9;">* Required fields</span>
             </div>
         </div>
         
@@ -50,7 +50,7 @@ ob_start();
             <hr class="mt-4 mb-3">
             
             <div>
-                <button type="submit" name="create" class="btn btn-primary">
+                <button type="submit" name="create" class="btn text-white" style="background-color: #0ea5e9;">
                     <i class="bi bi-save me-1"></i>Create
                 </button>
                 <button type="reset" class="btn btn-secondary">
@@ -61,12 +61,12 @@ ob_start();
     </div>
 </div>
 
-<div class="card shadow-sm">
+<div class="card shadow-sm bg-white border-0">
     <div class="card-body">
         <div class="row align-items-center mb-3">
             <div class="col">
-                <h5 class="mb-0">
-                    <i class="bi bi-table text-primary me-2"></i>
+                <h5 class="mb-0 text-dark">
+                    <i class="bi bi-table me-2" style="color: #0ea5e9;"></i>
                     Order List
                 </h5>
                 <small class="text-muted">View and manage all customer orders</small>
@@ -80,7 +80,7 @@ ob_start();
         
         <div class="table-responsive">
             <table class="table table-striped table-hover">
-                <thead class="table-dark">
+                <thead style="background-color: #0ea5e9; color: #ffffff;">
                     <tr>
                         <th>Order ID</th>
                         <th>Order Date</th>

@@ -1,25 +1,25 @@
 <?php 
 ob_start(); 
 ?>
-<div class="card shadow border-0 border-start border-5 border-primary mb-4">
+<div class="card shadow border-0 border-start border-5 mb-4" style="background-color: #ffffff; border-color: #0ea5e9 !important;">
     <div class="card-body">
         <div class="row align-items-center">
             <div class="col">
-                <h2 class="mb-1">Invoice</h2>
+                <h2 class="mb-1 text-dark">Invoice</h2>
                 <p class="text-muted mb-0">Order #O001</p>
             </div>
             <div class="col-auto">
-                <button type="button" onclick="window.print()" class="btn btn-primary"><i class="bi bi-printer me-1"></i>Print</button>
+                <button type="button" onclick="window.print()" class="btn text-white" style="background-color: #0ea5e9;"><i class="bi bi-printer me-1"></i>Print</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="card shadow-sm">
+<div class="card shadow-sm bg-white border-0">
     <div class="card-body p-4">
         <div class="row mb-4">
             <div class="col-md-6">
-                <h4>NexusDock</h4>
+                <h4 class="text-dark fw-bold">NexusDock</h4>
                 <p class="text-muted mb-0">Sales Invoice</p>
             </div>
             <div class="col-md-6 text-md-end">
@@ -84,6 +84,7 @@ ob_start();
     .card {
         border: none !important;
         box-shadow: none !important;
+        background-color: transparent !important;
     }
 }
 </style>

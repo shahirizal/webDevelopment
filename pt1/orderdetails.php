@@ -1,14 +1,14 @@
 <?php 
 ob_start(); 
 ?>
-<div class="card shadow border-0 border-start border-5 border-primary mb-4">
+<div class="card shadow border-0 border-start border-5 mb-4" style="background-color: #bae6fd; border-color: #0ea5e9 !important;">
     <div class="card-body">
-        <h2 class="mb-1">Order Details</h2>
+        <h2 class="mb-1 text-dark">Order Details</h2>
         <p class="text-muted mb-0">Order #O001 for Alice Johnson</p>
     </div>
 </div>
 
-<div class="card shadow-sm mb-4">
+<div class="card shadow-sm mb-4 bg-white border-0">
     <div class="card-body">
         <div class="row g-3">
             <div class="col-md-4"><strong>Order Date</strong><br>2026-10-03</div>
@@ -18,9 +18,9 @@ ob_start();
     </div>
 </div>
 
-<div class="card shadow-sm mb-4">
+<div class="card shadow-sm mb-4 bg-white border-0">
     <div class="card-body">
-        <h5 class="mb-3"><i class="bi bi-cart-plus text-primary me-2"></i>Add Product</h5>
+        <h5 class="mb-3 text-dark"><i class="bi bi-cart-plus me-2" style="color: #0ea5e9;"></i>Add Product</h5>
         <hr>
         <form action="" method="post" class="needs-validation" novalidate>
             <input type="hidden" name="order_num" value="O001">
@@ -39,16 +39,16 @@ ob_start();
                 </div>
             </div>
             <hr class="mt-4 mb-3">
-            <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i>Add Product</button>
+            <button type="submit" class="btn text-white" style="background-color: #0ea5e9;"><i class="bi bi-save me-1"></i>Add Product</button>
             <a href="#" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </div>
 
-<div class="card shadow-sm">
+<div class="card shadow-sm bg-white border-0">
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="mb-0"><i class="bi bi-table text-primary me-2"></i>Products in Order</h5>
+            <h5 class="mb-0 text-dark"><i class="bi bi-table me-2" style="color: #0ea5e9;"></i>Products in Order</h5>
             <a href="invoice.php" class="btn btn-success"><i class="bi bi-receipt me-1"></i>View Invoice</a>
         </div>
         <hr>
@@ -74,7 +74,7 @@ ob_start();
                             <a href="#" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
-                    <tr><td colspan="5" class="text-center">No products added to this order</td></tr>
+                    <tr><td colspan="5" class="text-center text-muted">No products added to this order</td></tr>
                 </tbody>
                 <tfoot>
                     <tr>
