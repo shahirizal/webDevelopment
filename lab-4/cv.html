@@ -43,21 +43,29 @@
         .navbar .nav-link { color: var(--text-main) !important; font-weight: 600; transition: color 0.2s; }
         .navbar .nav-link:hover, .navbar .nav-link.active { color: var(--accent-blue) !important; }
 
-        /* Hero Banner (Clear 100% ikut gambar asal) */
+        /* Hero Banner */
         .hero-banner { 
-          background: url('background.jpg'); 
+          background: linear-gradient(rgba(5, 11, 20, 0.7), rgba(5, 11, 20, 0.7)), url('background.jpg'); 
           background-size: cover; 
-          background-position: top;
+          background-position: center center; 
           border-bottom: 1px solid var(--border-color); 
           padding: 4.5rem 0; 
           color: #ffffff !important;
         }
 
-        /* Profile Master Card (Clear 100% ikut gambar asal) */
+        /* Kelas Gradient Khas untuk Hero Banner Title */
+        .hero-gradient-title {
+          background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          display: inline-block;
+        }
+
+        /* Profile Master Card */
         .profile-master-card {
           background: url('bar.jpg');
           background-size: cover;
-          background-position: center;
+          background-position: center center;
           border: 1px solid var(--border-color);
           border-radius: 16px;
           box-shadow: 0 10px 30px rgba(0,0,0,0.15);
@@ -69,7 +77,7 @@
           transform: translateY(-3px);
         }
 
-        /* Kotak Inner dalam Kad Profil (Putih solid untuk kontras teks yang jelas) */
+        /* Kotak Inner dalam Kad Profil */
         .profile-inner-box {
           background: #ffffff;
           border: 1px solid var(--border-color);
@@ -152,10 +160,10 @@
     </nav>
 
     <!-- 2. Hero Banner -->
-    <div id="home" class="hero-banner mb-5 text-center shadow-sm">
-        <div class="container">
-            <h2 class="mb-1 display-6 fw-bold text-white">Digital Curriculum Vitae</h2>
-            <p class="mb-0 text-white">Last updated: <span class="fw-light">October 2026</span></p>
+  <div id="home" class="hero-banner mb-5 text-center shadow-sm">
+        <div class="container d-flex flex-column align-items-center justify-content-center">
+            <h2 class="mb-2 display-6 fw-bold hero-gradient-title">Digital Curriculum Vitae</h2>
+            <p class="mb-0 hero-gradient-title">Last updated: October 2026</p>
         </div>
     </div>
 
@@ -407,7 +415,7 @@
         </div>
     </div>
 
-  <!-- 8. Footer -->
+    <!-- 8. Footer -->
     <footer class="text-center py-3 mt-5">
         <div class="container">
             <p class="mb-0 small">
