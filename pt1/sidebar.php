@@ -14,6 +14,12 @@
                 </a>
             </li>
             <li class="nav-item mb-3">
+                <a href="#" class="text-decoration-none" style="color: #38bdf8;">
+                    <i class="bi bi-bar-chart-line-fill me-2" style="color: #38bdf8;"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item mb-3">
                 <a href="products.php" class="text-decoration-none" style="color: #38bdf8;">
                     <i class="bi bi-box-seam me-2" style="color: #38bdf8;"></i>
                     Products
@@ -45,8 +51,8 @@
                     <i class="bi bi-person-fill fs-4" style="color: #38bdf8;"></i>
                 </div>
                 <div class="d-inline-block align-middle ms-2 text-start">
-                    <h6 class="mb-0 text-nowrap" style="color: #38bdf8;">User</h6>
-                    <small class="text-nowrap d-block" style="color: #38bdf8; opacity: 0.8;">user@email.com</small>
+                    <h6 class="mb-0 text-nowrap" style="color: #38bdf8;">Muhammad Shahir</h6>
+                    <small class="text-nowrap d-block" style="color: #38bdf8; opacity: 0.8;">A219426@siswa.ukm.edu.my</small>
                 </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
