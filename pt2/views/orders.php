@@ -106,21 +106,21 @@ ob_start();
                     <?php if (!empty($orders)): ?>
                         <?php foreach ($orders as $order): ?>
                             <tr>
-                                <td><?= htmlspecialchars($order['fld_order_num']) ?></td>
-                                <td><?= htmlspecialchars($order['fld_order_date']) ?></td>
-                                <td><?= htmlspecialchars($order['fld_staff_name'] ?? $order['fld_staff_num']) ?></td>
-                                <td><?= htmlspecialchars($order['fld_customer_name'] ?? $order['fld_customer_num']) ?></td>
+                                <td><?= htmlspecialchars((string)$order['fld_order_num']) ?></td>
+                                <td><?= htmlspecialchars((string)$order['fld_order_date']) ?></td>
+                                <td><?= htmlspecialchars((string)($order['fld_staff_name'] ?? $order['fld_staff_num'])) ?></td>
+                                <td><?= htmlspecialchars((string)($order['fld_customer_name'] ?? $order['fld_customer_num'])) ?></td>
                                 <td>
-                                    <a href="<?= BASE_URL ?>orderdetailcontroller/index/<?= htmlspecialchars($order['fld_order_num']) ?>" class="btn btn-sm btn-info text-white" title="Order details">
+                                    <a href="<?= BASE_URL ?>orderdetailcontroller/index/<?= htmlspecialchars((string)$order['fld_order_num']) ?>" class="btn btn-sm btn-info text-white" title="Order details">
                                         <i class="bi bi-list"></i>
                                     </a>
-                                    <a href="invoice.php" class="btn btn-sm btn-success" title="View invoice">
+                                    <a href="<?= BASE_URL ?>ordercontroller/invoice/<?= htmlspecialchars((string)$order['fld_order_num']) ?>" class="btn btn-sm btn-success" title="View invoice">
                                         <i class="bi bi-receipt"></i>
                                     </a>
-                                    <a href="<?= BASE_URL ?>ordercontroller/edit/<?= htmlspecialchars($order['fld_order_num']) ?>" class="btn btn-sm btn-warning" title="Edit">
+                                    <a href="<?= BASE_URL ?>ordercontroller/edit/<?= htmlspecialchars((string)$order['fld_order_num']) ?>" class="btn btn-sm btn-warning" title="Edit">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <a href="<?= BASE_URL ?>ordercontroller/delete/<?= htmlspecialchars($order['fld_order_num']) ?>" class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Are you sure to delete this order?');">
+                                    <a href="<?= BASE_URL ?>ordercontroller/delete/<?= htmlspecialchars((string)$order['fld_order_num']) ?>" class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Are you sure to delete this order?');">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </td>

@@ -21,32 +21,32 @@ class ProductModel {
     public function create($data) {
         $sql = "INSERT INTO tbl_products_a219426 
                 (fld_product_num, fld_product_name, fld_product_price, 
-                 fld_product_brand, fld_product_condition, fld_product_year, 
+                 fld_product_brand, fld_product_wattage, fld_product_ports, 
                  fld_product_quantity, fld_product_image) 
                 VALUES 
                 (:product_num, :product_name, :product_price, 
-                 :product_brand, :product_condition, :product_year, 
+                 :product_brand, :product_wattage, :product_ports, 
                  :product_quantity, :product_image)";
 
         $stmt = $this->db->prepare($sql);
 
-        $product_num       = $data['product_num'];
-        $product_name      = $data['product_name'];
-        $product_price     = $data['product_price'];
-        $product_brand     = $data['product_brand'];
-        $product_condition = $data['product_condition'];
-        $product_year      = $data['product_year'];
-        $product_quantity  = $data['product_quantity'];
-        $product_image     = $data['product_image'] ?? '';
+        $product_num      = $data['product_num'];
+        $product_name     = $data['product_name'];
+        $product_price    = $data['product_price'];
+        $product_brand    = $data['product_brand'];
+        $product_wattage  = $data['product_wattage'];
+        $product_ports    = $data['product_ports'];
+        $product_quantity = $data['product_quantity'];
+        $product_image    = $data['product_image'] ?? '';
 
-        $stmt->bindValue(':product_num',       $product_num,       PDO::PARAM_STR);
-        $stmt->bindValue(':product_name',      $product_name,      PDO::PARAM_STR);
-        $stmt->bindValue(':product_price',     $product_price);
-        $stmt->bindValue(':product_brand',     $product_brand,     PDO::PARAM_STR);
-        $stmt->bindValue(':product_condition', $product_condition, PDO::PARAM_STR);
-        $stmt->bindValue(':product_year',      $product_year,      PDO::PARAM_INT);
-        $stmt->bindValue(':product_quantity',  $product_quantity,  PDO::PARAM_INT);
-        $stmt->bindValue(':product_image',     $product_image,     PDO::PARAM_STR);
+        $stmt->bindValue(':product_num',      $product_num,      PDO::PARAM_STR);
+        $stmt->bindValue(':product_name',     $product_name,     PDO::PARAM_STR);
+        $stmt->bindValue(':product_price',    $product_price);
+        $stmt->bindValue(':product_brand',    $product_brand,    PDO::PARAM_STR);
+        $stmt->bindValue(':product_wattage',  $product_wattage,  PDO::PARAM_STR);
+        $stmt->bindValue(':product_ports',    $product_ports,    PDO::PARAM_STR);
+        $stmt->bindValue(':product_quantity', $product_quantity, PDO::PARAM_INT);
+        $stmt->bindValue(':product_image',    $product_image,    PDO::PARAM_STR);
 
         $result = $stmt->execute();
         return $result;
@@ -69,8 +69,8 @@ class ProductModel {
                     fld_product_name = :product_name, 
                     fld_product_price = :product_price, 
                     fld_product_brand = :product_brand, 
-                    fld_product_condition = :product_condition, 
-                    fld_product_year = :product_year, 
+                    fld_product_wattage = :product_wattage, 
+                    fld_product_ports = :product_ports, 
                     fld_product_quantity = :product_quantity, 
                     fld_product_image = :product_image 
                 WHERE fld_product_num = :original_product_num";
@@ -82,8 +82,8 @@ class ProductModel {
         $product_name         = $data['product_name'];
         $product_price        = $data['product_price'];
         $product_brand        = $data['product_brand'];
-        $product_condition    = $data['product_condition'];
-        $product_year         = $data['product_year'];
+        $product_wattage      = $data['product_wattage'];
+        $product_ports        = $data['product_ports'];
         $product_quantity     = $data['product_quantity'];
         $product_image        = $data['product_image'] ?? '';
 
@@ -92,8 +92,8 @@ class ProductModel {
         $stmt->bindValue(':product_name',         $product_name,         PDO::PARAM_STR);
         $stmt->bindValue(':product_price',        $product_price);
         $stmt->bindValue(':product_brand',        $product_brand,        PDO::PARAM_STR);
-        $stmt->bindValue(':product_condition',    $product_condition,    PDO::PARAM_STR);
-        $stmt->bindValue(':product_year',         $product_year,         PDO::PARAM_INT);
+        $stmt->bindValue(':product_wattage',      $product_wattage,      PDO::PARAM_STR);
+        $stmt->bindValue(':product_ports',        $product_ports,        PDO::PARAM_STR);
         $stmt->bindValue(':product_quantity',     $product_quantity,     PDO::PARAM_INT);
         $stmt->bindValue(':product_image',        $product_image,        PDO::PARAM_STR);
 

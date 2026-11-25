@@ -1,6 +1,6 @@
 <div id="mySidebar" class="text-white offcanvas-lg offcanvas-start" style="background-color: #0f172a; width: 260px;">
     <div class="p-4">
-        <a href="<?= BASE_URL ?>" class="navbar-brand text-decoration-none">
+        <a href="<?= BASE_URL ?>index.php" class="navbar-brand text-decoration-none">
             <div class="row">
                 <h5 class="fw-bold" style="color: #38bdf8;">NexusDock</h5>
             </div>
@@ -8,13 +8,13 @@
         <hr style="border-color: #334155;">                
         <ul class="mynav nav nav-pills flex-column">
             <li class="nav-item mb-3 mt-2">
-                <a href="<?= BASE_URL ?>" class="text-decoration-none" style="color: #38bdf8;">
+                <a href="<?= BASE_URL ?>index.php" class="text-decoration-none" style="color: #38bdf8;">
                     <i class="bi bi-house-fill me-2" style="color: #38bdf8;"></i>
                     Home
                 </a>
             </li>
             <li class="nav-item mb-3">
-                <a href="#" class="text-decoration-none" style="color: #38bdf8;">
+                <a href="<?= BASE_URL ?>index.php" class="text-decoration-none" style="color: #38bdf8;">
                     <i class="bi bi-bar-chart-line-fill me-2" style="color: #38bdf8;"></i>
                     Dashboard
                 </a>
@@ -56,7 +56,7 @@
                 </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="">Logout</a></li>
+                <li><a class="dropdown-item" href="index.html">Back to PT2 Hub</a></li>
             </ul>
         </div>
     </div>

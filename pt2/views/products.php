@@ -58,29 +58,29 @@ ob_start();
                 </div>
                 
                 <div class="col-md-3">
-                    <label for="product_condition" class="form-label">Condition <span class="text-danger" aria-hidden="true">*</span></label>
+                    <label for="product_wattage" class="form-label">Max Output <span class="text-danger" aria-hidden="true">*</span></label>
                     <?php
-                    $conditions = ['New', 'Used'];
-                    $selectedCondition = $aproduct['fld_product_condition'] ?? '';
+                    $wattages = ['15W', '30W', '65W', '100W', '140W'];
+                    $selectedWattage = $aproduct['fld_product_wattage'] ?? '';
                     ?>
-                    <select name="product_condition" id="product_condition" class="form-select" required>
-                        <option value="">Select Condition</option>
-                        <?php foreach ($conditions as $condition): ?>
-                            <option value="<?= htmlspecialchars($condition) ?>" <?= $selectedCondition === $condition ? 'selected' : '' ?>><?= htmlspecialchars($condition) ?></option>
+                    <select name="product_wattage" id="product_wattage" class="form-select" required>
+                        <option value="">Select Wattage</option>
+                        <?php foreach ($wattages as $wattage): ?>
+                            <option value="<?= htmlspecialchars($wattage) ?>" <?= $selectedWattage === $wattage ? 'selected' : '' ?>><?= htmlspecialchars($wattage) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
 
                 <div class="col-md-3">
-                    <label for="product_year" class="form-label">Year <span class="text-danger" aria-hidden="true">*</span></label>
+                    <label for="product_ports" class="form-label">Charging Slots <span class="text-danger" aria-hidden="true">*</span></label>
                     <?php
-                    $years = [2022, 2023, 2024, 2025, 2026];
-                    $selectedYear = (string)($aproduct['fld_product_year'] ?? '');
+                    $portOptions = ['Dual Slot', '2-in-1', '3-in-1', '4-in-1', '5-in-1'];
+                    $selectedPorts = $aproduct['fld_product_ports'] ?? '';
                     ?>
-                    <select name="product_year" id="product_year" class="form-select" required>
-                        <option value="">Select Year</option>
-                        <?php foreach ($years as $year): ?>
-                            <option value="<?= htmlspecialchars((string)$year) ?>" <?= $selectedYear === (string)$year ? 'selected' : '' ?>><?= htmlspecialchars((string)$year) ?></option>
+                    <select name="product_ports" id="product_ports" class="form-select" required>
+                        <option value="">Select Slots</option>
+                        <?php foreach ($portOptions as $ports): ?>
+                            <option value="<?= htmlspecialchars($ports) ?>" <?= $selectedPorts === $ports ? 'selected' : '' ?>><?= htmlspecialchars($ports) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -127,13 +127,17 @@ ob_start();
         <hr>
         
         <div class="table-responsive">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover align-middle">
                 <thead style="background-color: #0ea5e9; color: #ffffff;">
                     <tr>
+                        <th>Image</th>
                         <th>Product ID</th>
                         <th>Name</th>
-                        <th>Price</th>
                         <th>Brand</th>
+                        <th>Price</th>
+                        <th>Max Output</th>
+                        <th>Slots</th>
+                        <th>Stock</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -141,16 +145,30 @@ ob_start();
                     <?php if (!empty($products)): ?>
                         <?php foreach ($products as $product): ?>
                             <tr>
+                                <td>
+                                    <?php if (!empty($product['fld_product_image'])): ?>
+                                        <img src="<?= BASE_URL ?>images/<?= htmlspecialchars($product['fld_product_image']) ?>"
+                                             alt="<?= htmlspecialchars($product['fld_product_name']) ?>"
+                                             style="width: 56px; height: 56px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1;"
+                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+                                        <span class="badge bg-light text-muted border" style="display: none; width: 56px; height: 56px; align-items: center; justify-content: center;">No Img</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-light text-muted border" style="display: inline-flex; width: 56px; height: 56px; align-items: center; justify-content: center;">No Img</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td><?php echo htmlspecialchars($product['fld_product_num']); ?></td>
                                 <td><?php echo htmlspecialchars($product['fld_product_name']); ?></td>
-                                <td>RM<?php echo number_format((float)$product['fld_product_price'], 2); ?></td>
                                 <td><?php echo htmlspecialchars($product['fld_product_brand']); ?></td>
-                                <td>
+                                <td>RM<?php echo number_format((float)$product['fld_product_price'], 2); ?></td>
+                                <td><?php echo htmlspecialchars($product['fld_product_wattage'] ?? '-'); ?></td>
+                                <td><?php echo htmlspecialchars($product['fld_product_ports'] ?? '-'); ?></td>
+                                <td><?php echo htmlspecialchars((string)($product['fld_product_quantity'] ?? 0)); ?></td>
+                                <td class="text-nowrap">
                                     <a href="<?= BASE_URL; ?>productcontroller/edit/<?php echo htmlspecialchars($product['fld_product_num']); ?>" class="btn btn-sm btn-warning" title="Edit">
                                         <i class="bi bi-pencil"></i>
                                     </a>
                                     <?php if (!empty($product['fld_product_image'])): ?>
-                                        <a href="<?= BASE_URL ?>images/<?= htmlspecialchars($product['fld_product_image']) ?>" target="_blank" class="btn btn-sm text-white" style="background-color: #0ea5e9;" title="View image">
+                                        <a href="<?= BASE_URL ?>images/<?= htmlspecialchars($product['fld_product_image']) ?>" target="_blank" class="btn btn-sm text-white" style="background-color: #0ea5e9;" title="View full image">
                                             <i class="bi bi-image"></i>
                                         </a>
                                     <?php else: ?>
@@ -166,7 +184,7 @@ ob_start();
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="5" class="text-center">No products found</td>
+                            <td colspan="9" class="text-center">No products found</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>

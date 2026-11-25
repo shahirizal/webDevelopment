@@ -12,7 +12,7 @@ else
 if (!empty($url[0])) {
     $controllerName = $url[0];
     if (isset($url[1])) {
-        $method = $url[1];
+        $method = preg_replace('/\.php$/i', '', $url[1]);
     } else {
         $method = "index";
     }  
